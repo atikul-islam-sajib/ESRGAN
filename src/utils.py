@@ -1,3 +1,4 @@
+import yaml
 import joblib
 
 
@@ -15,3 +16,8 @@ def load(filename=None):
 
     else:
         raise ValueError("Filename cannot be None".capitalize())
+
+
+def config():
+    with open("./config.yml", "r") as ymlfile:
+        return yaml.safe_load(ymlfile)
