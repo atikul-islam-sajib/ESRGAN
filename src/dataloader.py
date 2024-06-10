@@ -1,17 +1,14 @@
 import os
 import cv2
-import torch
-import joblib
 import zipfile
-import numpy as np
-import pandas as pd
+import argparse
 from PIL import Image
 import matplotlib.pyplot as plt
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import train_test_split
 
-from utils import dump, load
+from utils import dump, load, config
 
 
 class Loader:
@@ -23,6 +20,8 @@ class Loader:
 
         self.LR = []
         self.HR = []
+
+        self.CONFIG = config()
 
     def split_dataset(self, X=None, y=None):
         if isinstance(X, list) and isinstance(y, list):
@@ -59,15 +58,15 @@ class Loader:
             )
 
     def unzip_folder(self):
-        if os.path.exists(RAW_DATA_PATH):
+        if os.path.exists(self.CONFIG["path"]["RAW_DATA_PATH"]):
             with zipfile.ZipFile(self.image_path, "r") as zip_file:
-                zip_file.extractall(os.path.join(RAW_DATA_PATH))
+                zip_file.extractall(os.path.join(self.CONFIG["path"]["RAW_DATA_PATH"]))
         else:
             raise Exception("RAW data path is not found".capitalize())
 
     def feature_extraction(self):
 
-        self.directory = os.path.join(RAW_DATA_PATH, "dataset")
+        self.directory = os.path.join(self.CONFIG["path"]["RAW_DATA_PATH"], "dataset")
 
         self.higher_resolution_images = os.path.join(self.directory, "HR")
         self.low_resolution_images = os.path.join(self.directory, "LR")
@@ -128,19 +127,23 @@ class Loader:
             ]:
                 dump(
                     value=dataloader,
-                    filename=os.path.join(PROCESSED_DATA_PATH, filename + ".pkl"),
+                    filename=os.path.join(
+                        self.CONFIG["path"]["PROCESSED_DATA_PATH"], filename + ".pkl"
+                    ),
                 )
 
             print(
                 "train and valid dataloader has been created in the folder : {}".format(
-                    PROCESSED_DATA_PATH
+                    self.CONFIG["path"]["PROCESSED_DATA_PATH"]
                 ).capitalize()
             )
 
     @staticmethod
     def plot_images():
         dataloader = load(
-            filename=os.path.join(PROCESSED_DATA_PATH, "valid_dataloader.pkl")
+            filename=os.path.join(
+                config()["path"]["PROCESSED_DATA_PATH"], "valid_dataloader.pkl"
+            )
         )
 
         data, labels = next(iter(dataloader))
@@ -165,14 +168,52 @@ class Loader:
             plt.axis("off")
 
         plt.tight_layout()
+        plt.savefig(os.path.join(config()["path"]["ARTIFACTS_PATH"], "images.png"))
         plt.show()
+
+        print(
+            "Images have been saved in the folder : {}".format(
+                config()["path"]["ARTIFACTS_PATH"]
+            ).capitalize()
+        )
 
 
 if __name__ == "__main__":
-    loader = Loader(
-        image_path="../../data/raw/dataset.zip", image_size=64, split_size=0.40
+    parser = argparse.ArgumentParser(description="Dataloader for ESRGAN".title())
+    parser.add_argument(
+        "--image_path",
+        type=str,
+        default=config()["dataloader"]["image_path"],
+        help="Define the dataset in zip format".capitalize(),
     )
+    parser.add_argument(
+        "--image_size",
+        type=int,
+        default=config()["dataloader"]["image_size"],
+        help="Define the image size".capitalize(),
+    )
+    parser.add_argument(
+        "--split_size",
+        type=float,
+        default=config()["dataloader"]["split_size"],
+        help="Define the split size".capitalize(),
+    )
+    parser.add_argument(
+        "--batch_size",
+        type=int,
+        default=config()["dataloader"]["batch_size"],
+        help="Define the batch size".capitalize(),
+    )
+    args = parser.parse_args()
+
+    loader = Loader(
+        image_path=args.image_path,
+        image_size=args.image_size,
+        split_size=args.split_size,
+        batch_size=args.batch_size,
+    )
+
     loader.unzip_folder()
     loader.create_dataloader()
 
-    loader.plot_images()
+    Loader.plot_images()
