@@ -38,6 +38,14 @@ class ResidualInResidual(nn.Module):
 
 
 if __name__ == "__main__":
-    residual_in_residual = ResidualInResidual(in_channels=64)
+    parser = argparse.ArgumentParser(description="Residual In Residual".title())
+    parser.add_argument(
+        "--in_channels",
+        type=int,
+        default=64,
+        help="Define in_channels for ResidualInResidual".capitalize(),
+    )
 
-    print(residual_in_residual)
+    args = parser.parse_args()
+
+    residual_in_residual = ResidualInResidual(in_channels=args.in_channels)
