@@ -51,6 +51,22 @@ class OutputBlock(nn.Module):
 
 
 if __name__ == "__main__":
-    outblock = OutputBlock(in_channels=64, out_channels=3)
+    parser = argparse.ArgumentParser(description="Output Block for netG".title())
+    parser.add_argument(
+        "--in_channels",
+        type=int,
+        default=64,
+        help="Define the in_channels".capitalize(),
+    )
+    parser.add_argument(
+        "--out_channels",
+        type=int,
+        default=3,
+        help="Define the out_channels".capitalize(),
+    )
 
-    print(outblock(torch.randn(1, 64, 64, 64)).size())
+    args = parser.parse_args()
+
+    outblock = OutputBlock(in_channels=args.in_channels, out_channels=args.out_channels)
+
+    assert outblock(torch.randn(1, 64, 64, 64)).size() == (1, 64, 256, 256)
