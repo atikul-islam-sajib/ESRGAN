@@ -5,8 +5,8 @@ import torch.nn as nn
 
 from utils import config
 
-from dense_block import DenseBlock
 from output_block import OutputBlock
+from residual_in_residual import ResidualInResidual
 
 from torchview import draw_graph
 from torchsummary import summary
@@ -33,15 +33,9 @@ class Generator(nn.Module):
             bias=True,
         )
 
-        for _ in range(19):
-            self.layers.append(
-                DenseBlock(
-                    in_channels=self.out_channels,
-                    out_channels=self.out_channels,
-                )
-            )
-
-        self.residual_in_residual_denseblock = nn.Sequential(*self.layers)
+        self.residual_in_residual_denseblock = nn.Sequential(
+            *[ResidualInResidual(in_channels=self.out_channels) for _ in range(16)]
+        )
 
         self.middle_block = nn.Conv2d(
             in_channels=self.out_channels,
@@ -60,7 +54,6 @@ class Generator(nn.Module):
                 kernel_size=self.kernel_size,
                 stride=self.stride_size,
                 padding=self.padding_size,
-                bias=True,
             ),
         )
 
@@ -99,7 +92,7 @@ if __name__ == "__main__":
 
     netG = Generator(in_channels=args.in_channels, out_channels=args.out_channels)
 
-    assert Generator.total_params(model=netG) == 3102275
+    assert Generator.total_params(model=netG) == 26893315
 
     assert netG(torch.randn(1, 3, 64, 64)).size() == (1, 3, 256, 256)
 

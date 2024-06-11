@@ -4,11 +4,12 @@ import torch.nn as nn
 
 
 class DenseBlock(nn.Module):
-    def __init__(self, in_channels=64, out_channels=64):
+    def __init__(self, in_channels=64, out_channels=64, res_scale=0.2):
         super(DenseBlock, self).__init__()
 
         self.in_channels = in_channels
         self.out_channels = out_channels
+        self.res_scale = res_scale
 
         self.kernel_size = 3
         self.stride = 1
@@ -76,7 +77,7 @@ class DenseBlock(nn.Module):
 
             outputs = self.block5(inputs)
 
-            return outputs
+            return torch.mul(outputs, self.res_scale) + x
 
         else:
             raise TypeError("Input must be a tensor".capitalize())
@@ -100,11 +101,13 @@ if __name__ == "__main__":
 
     layers = []
 
-    for _ in range(5):
+    for _ in range(1):
         layers += [
             DenseBlock(in_channels=args.in_channels, out_channels=args.out_channels)
         ]
 
     model = nn.Sequential(*layers)
+
+    print(model)
 
     assert model(torch.randn(1, 64, 256, 256)).size() == (1, 64, 256, 256)
