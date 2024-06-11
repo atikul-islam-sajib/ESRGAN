@@ -33,7 +33,7 @@ class Generator(nn.Module):
             bias=True,
         )
 
-        for _ in range(5):
+        for _ in range(19):
             self.layers.append(
                 DenseBlock(
                     in_channels=self.out_channels,
