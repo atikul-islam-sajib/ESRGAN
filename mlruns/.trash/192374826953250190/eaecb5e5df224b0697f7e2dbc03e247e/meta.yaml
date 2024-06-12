@@ -1,0 +1,16 @@
+artifact_uri: file:///Users/shahmuhammadraditrahman/Desktop/ESRGAN/mlruns/192374826953250190/eaecb5e5df224b0697f7e2dbc03e247e/artifacts
+deleted_time: 1718222729919
+end_time: 1718222675637
+entry_point_name: ''
+experiment_id: '192374826953250190'
+lifecycle_stage: deleted
+run_id: eaecb5e5df224b0697f7e2dbc03e247e
+run_name: loud-stoat-631
+run_uuid: eaecb5e5df224b0697f7e2dbc03e247e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1718222653911
+status: 4
+tags: []
+user_id: shahmuhammadraditrahman

@@ -1,10 +1,12 @@
 import os
 import torch
+import mlflow
 import argparse
 import numpy as np
 from tqdm import tqdm
 from helpers import helper
 import matplotlib.pyplot as plt
+from dagshub import dagshub_logger
 from torchvision.utils import save_image
 from utils import config, load, dump, device_init, weight_init
 
@@ -72,6 +74,18 @@ class Trainer:
         self.CONFIG = config()
 
         self.history = {"netG_loss": [], "netD_loss": []}
+
+        os.environ["MLFLOW_TRACKING_URI"] = (
+            "https://dagshub.com/atikul-islam-sajib/ESRGAN.mlflow"
+        )
+
+        # Authenticate with your DagsHub token
+        os.environ["MLFLOW_TRACKING_USERNAME"] = "atikul-islam-sajib"
+        os.environ["MLFLOW_TRACKING_PASSWORD"] = (
+            "0c9062f98631dcdb3a9b2d56ebba7ff850a19139"
+        )
+
+        mlflow.set_experiment(experiment_name="ESRGAN".title())
 
     def l1_loss(self, model=None):
         if model is not None:
@@ -201,38 +215,66 @@ class Trainer:
         )
 
     def train(self):
-        for epoch in tqdm(range(self.epochs)):
-            self.netD_loss = []
-            self.netG_loss = []
+        with mlflow.start_run() as run:
+            for epoch in tqdm(range(self.epochs)):
+                self.netD_loss = []
+                self.netG_loss = []
 
-            for _, (lr_image, hr_image) in enumerate(self.train_dataloader):
+                for _, (lr_image, hr_image) in enumerate(self.train_dataloader):
 
-                lr_image = lr_image.to(self.device)
-                hr_image = hr_image.to(self.device)
+                    lr_image = lr_image.to(self.device)
+                    hr_image = hr_image.to(self.device)
 
-                self.netD_loss.append(
-                    self.update_netD(lr_image=lr_image, hr_image=hr_image)
+                    self.netD_loss.append(
+                        self.update_netD(lr_image=lr_image, hr_image=hr_image)
+                    )
+                    self.netG_loss.append(
+                        self.update_netG(lr_image=lr_image, hr_image=hr_image)
+                    )
+
+                self.show_progress(
+                    epoch=epoch,
+                    netG_loss=np.mean(self.netG_loss),
+                    netD_loss=np.mean(self.netD_loss),
                 )
-                self.netG_loss.append(
-                    self.update_netG(lr_image=lr_image, hr_image=hr_image)
-                )
 
-            self.show_progress(
-                epoch=epoch,
-                netG_loss=np.mean(self.netG_loss),
-                netD_loss=np.mean(self.netD_loss),
+                self.saved_train_images(epoch=epoch)
+                self.saved_checkpoints(netG_loss=np.mean(self.netG_loss), epoch=epoch)
+
+                self.history["netG_loss"].append(np.mean(self.netG_loss))
+                self.history["netD_loss"].append(np.mean(self.netD_loss))
+
+                mlflow.log_metric("netG_loss", np.mean(self.netG_loss), step=epoch + 1)
+                mlflow.log_metric("netD_loss", np.mean(self.netD_loss), step=epoch + 1)
+
+            dump(
+                value=self.history,
+                filename=os.path.join(
+                    self.CONFIG["path"]["METRICS_PATH"], "history.pkl"
+                ),
             )
 
-            self.saved_train_images(epoch=epoch)
-            self.saved_checkpoints(netG_loss=np.mean(self.netG_loss), epoch=epoch)
+            mlflow.log_params(
+                {
+                    "epochs": self.epochs,
+                    "lr": self.lr,
+                    "beta1": self.beta1,
+                    "beta2": self.beta2,
+                    "momentum": self.momentum,
+                    "adam": self.adam,
+                    "SGD": self.SGD,
+                    "content_loss": self.content_loss,
+                    "pixel_loss": self.pixel_loss,
+                    "adversarial_loss": self.adversarial_loss,
+                    "adversarial_loss": self.adversarial_loss.__class__.__name__,
+                    "lr_scheduler": self.lr_scheduler,
+                    "weight_init": self.is_weight_init,
+                    "verbose": self.is_verbose,
+                    "device": self.device,
+                }
+            )
 
-            self.history["netG_loss"].append(np.mean(self.netG_loss))
-            self.history["netD_loss"].append(np.mean(self.netD_loss))
-
-        dump(
-            value=self.history,
-            filename=os.path.join(self.CONFIG["path"]["METRICS_PATH"], "history.pkl"),
-        )
+            mlflow.pytorch.log_model(self.netG, "model")
 
     @staticmethod
     def plot_history():

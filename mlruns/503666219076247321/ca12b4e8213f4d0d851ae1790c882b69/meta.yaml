@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/shahmuhammadraditrahman/Desktop/ESRGAN/mlruns/503666219076247321/ca12b4e8213f4d0d851ae1790c882b69/artifacts
+end_time: 1718222772232
+entry_point_name: ''
+experiment_id: '503666219076247321'
+lifecycle_stage: active
+run_id: ca12b4e8213f4d0d851ae1790c882b69
+run_name: colorful-auk-673
+run_uuid: ca12b4e8213f4d0d851ae1790c882b69
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1718222748756
+status: 3
+tags: []
+user_id: shahmuhammadraditrahman
