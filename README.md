@@ -100,6 +100,15 @@ For detailed documentation on the implementation and usage, visit the -> [ESRGAN
 
 For detailed documentation on the implementation and usage, visit the -> [ESRGAN Notebook - CM](https://github.com/atikul-islam-sajib/SRGAN/blob/main/research/notebooks/ModelTrain-Modules.ipynb).
 
+## Data Versioning with DVC
+To ensure you have the correct version of the dataset and model artifacts.
+
+Reproducing the Pipeline
+To reproduce the entire pipeline and ensure consistency, use:
+
+```bash
+dvc repro
+```
 
 ### Command Line Interface
 
