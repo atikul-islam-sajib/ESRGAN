@@ -4,7 +4,7 @@
 
 This project provides a complete framework for training and testing a Enhanced Super-Resolution Generative Adversarial Network (SR-GAN). It includes functionality for data preparation, model training, testing, and inference to enhance low-resolution images to high-resolution.
 
-<img src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41524-022-00749-z/MediaObjects/41524_2022_749_Fig1_HTML.png" alt="AC-GAN - Medical Image Dataset Generator: Generated Image with labels">
+<img src="https://esrgan.readthedocs.io/en/latest/_images/architecture.png" alt="AC-GAN - Medical Image Dataset Generator: Generated Image with labels">
 
 ## Features
 
@@ -76,7 +76,7 @@ This project is thoughtfully organized to support the development, training, and
 
 ### Dataset Organization for srgan
 
-The dataset is organized into three categories for SRGAN. Each category directly contains paired images and their corresponding lower resolution images and higher resolution, stored together to simplify the association between lower resolution and higher resolution images .
+The dataset is organized into three categories for ESRGAN. Each category directly contains paired images and their corresponding lower resolution images and higher resolution, stored together to simplify the association between lower resolution and higher resolution images .
 
 ## Directory Structure:
 
