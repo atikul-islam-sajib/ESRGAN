@@ -15,7 +15,7 @@ dataloader:
   batch_size: 1
 
 trainer:
-  epochs: 500
+  epochs: 1
   lr: 0.0002
   beta1: 0.5
   beta2: 0.999
