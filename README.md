@@ -189,6 +189,79 @@ tester = Tester(device="cuda", model="path/to/model.pth") # use mps, cpu
 test.test()
 ```
 
+Here's the updated README file mentioning the hosted MLflow tracking on DagsHub:
+
+---
+
+# ESRGAN Project
+
+This project demonstrates the use of ESRGAN (Enhanced Super-Resolution Generative Adversarial Networks) for image super-resolution. We use MLflow for experiment tracking and DagsHub for collaborative data science.
+
+## Setup
+
+### Prerequisites
+
+- Python 3.6 or higher
+- `pip` package manager
+- DagsHub account
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://dagshub.com/atikul-islam-sajib/ESRGAN.git
+   cd ESRGAN
+   ```
+
+2. **Create a virtual environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+3. **Install the required packages**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Configuration for MLFlow
+
+1. **Generate a Personal Access Token on DagsHub**:
+   - Log in to [DagsHub](https://dagshub.com).
+   - Go to your user settings and generate a new personal access token under "Personal Access Tokens".
+
+2. **Set environment variables**:
+   Set the following environment variables with your DagsHub credentials:
+   ```bash
+   export MLFLOW_TRACKING_URI="https://dagshub.com/<username>/<repo_name>.mlflow"
+   export MLFLOW_TRACKING_USERNAME="<your_dagshub_username>"
+   export MLFLOW_TRACKING_PASSWORD="<your_dagshub_token>"
+   ```
+
+   Replace `<username>`, `<repo_name>`, `<your_dagshub_username>`, and `<your_dagshub_token>` with your actual DagsHub username, repository name, and personal access token.
+
+### Running the Training Script
+
+To start training and logging the experiments to DagsHub, run the following command:
+
+```bash
+python src/train.py
+```
+
+### Accessing Experiment Tracking
+
+You can access the MLflow experiment tracking UI hosted on DagsHub using the following link:
+
+[ESRGAN Experiment Tracking on DagsHub](https://dagshub.com/atikul-islam-sajib/ESRGAN/experiments/#/)
+
+### Using MLflow UI Locally
+
+If you prefer to run the MLflow UI locally, use the following command:
+
+```bash
+mlflow ui
+```
+
 
 ## Contributing
 Contributions to improve this implementation of ESRGAN are welcome. Please follow the standard fork-branch-pull request workflow.
