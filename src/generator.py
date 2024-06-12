@@ -34,7 +34,7 @@ class Generator(nn.Module):
         )
 
         self.residual_in_residual_denseblock = nn.Sequential(
-            *[ResidualInResidual(in_channels=self.out_channels) for _ in range(3)]
+            *[ResidualInResidual(in_channels=self.out_channels) for _ in range(19)]
         )
 
         self.middle_block = nn.Conv2d(

@@ -12,10 +12,10 @@ dataloader:
   image_path: "./data/raw/dataset.zip"
   image_size: 64
   split_size: 0.40
-  batch_size: 1
+  batch_size: 4
 
 trainer:
-  epochs: 5
+  epochs: 500
   lr: 0.0002
   beta1: 0.5
   beta2: 0.999
