@@ -189,41 +189,6 @@ tester = Tester(device="cuda", model="path/to/model.pth") # use mps, cpu
 test.test()
 ```
 
-Here's the updated README file mentioning the hosted MLflow tracking on DagsHub:
-
----
-
-# ESRGAN Project
-
-This project demonstrates the use of ESRGAN (Enhanced Super-Resolution Generative Adversarial Networks) for image super-resolution. We use MLflow for experiment tracking and DagsHub for collaborative data science.
-
-## Setup
-
-### Prerequisites
-
-- Python 3.6 or higher
-- `pip` package manager
-- DagsHub account
-
-### Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://dagshub.com/atikul-islam-sajib/ESRGAN.git
-   cd ESRGAN
-   ```
-
-2. **Create a virtual environment**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
-
-3. **Install the required packages**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
 ### Configuration for MLFlow
 
 1. **Generate a Personal Access Token on DagsHub**:
