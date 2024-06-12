@@ -3,6 +3,7 @@ path:
   PROCESSED_DATA_PATH: "./data/processed/"
   ARTIFACTS_PATH: "./research/artifacts/"
   TRAIN_IMAGES_PATH: "./outputs/train_images/"
+  TEST_IMAGE_PATH: "./outputs/test_images/"
   TRAIN_MODEL_CHECKPOINT_PATH: "./checkpoints/train_models"
   METRICS_PATH: "./outputs/metrics/"
   BEST_MODEL_CHECKPOINT_PATH: "./checkpoints/best_model"
@@ -25,4 +26,9 @@ trainer:
   pixel_loss: 0.05
   device: "mps"
   lr_scheduler: False
-  weight_init: False
+  weight_init: True
+
+tester:
+  model: "best"       # "./checkpoints/best_model/netG.pth"
+  device: "mps"
+  dataloader: "valid"

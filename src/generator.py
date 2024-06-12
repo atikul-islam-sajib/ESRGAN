@@ -34,7 +34,7 @@ class Generator(nn.Module):
         )
 
         self.residual_in_residual_denseblock = nn.Sequential(
-            *[ResidualInResidual(in_channels=self.out_channels) for _ in range(5)]
+            *[ResidualInResidual(in_channels=self.out_channels) for _ in range(3)]
         )
 
         self.middle_block = nn.Conv2d(
@@ -94,12 +94,12 @@ if __name__ == "__main__":
 
     print(netG(torch.randn(1, 3, 64, 64)).size())
 
-    # assert Generator.total_params(model=netG) == 26893315
+    assert Generator.total_params(model=netG) == 26893315
 
-    # assert netG(torch.randn(1, 3, 64, 64)).size() == (1, 3, 256, 256)
+    assert netG(torch.randn(1, 3, 64, 64)).size() == (1, 3, 256, 256)
 
-    # draw_graph(model=netG, input_data=torch.randn(1, 3, 64, 64)).visual_graph.render(
-    #     filename=os.path.join(config()["path"]["ARTIFACTS_PATH"], "netG"), format="png"
-    # )
+    draw_graph(model=netG, input_data=torch.randn(1, 3, 64, 64)).visual_graph.render(
+        filename=os.path.join(config()["path"]["ARTIFACTS_PATH"], "netG"), format="png"
+    )
 
-    # print(summary(model=netG, input_size=(3, 64, 64)))
+    print(summary(model=netG, input_size=(3, 64, 64)))
