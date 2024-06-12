@@ -49,3 +49,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     residual_in_residual = ResidualInResidual(in_channels=args.in_channels)
+
+    print(residual_in_residual)
