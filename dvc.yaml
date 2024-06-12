@@ -7,4 +7,29 @@ stages:
       - ./src/trainer.py
       - ./data/processed/
 
+    outs:
+      - ./checkpoints/:
+        persist: true
+      - ./outputs/:
+        persist: true
+      - ./research/artifacts/:
+        persist: true
+      - ./metrics/:
+        persist: true
+
+
+  test:
+    cmd: python ./src/cli.py --test
+    deps: 
+      - ./src/cli.py
+      - ./src/tester.py
+      - ./src/dataloader.py
+      - ./src/trainer.py
+      - ./data/processed/
+      - ./checkpoints/
+
+    outs:
+      - ./outputs/:
+        persist: true
+
 

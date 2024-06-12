@@ -125,19 +125,19 @@ def cli():
 
     args = parser.parse_args()
 
-    loader = Loader(
-        image_path=args.image_path,
-        image_size=args.image_size,
-        split_size=args.split_size,
-        batch_size=args.batch_size,
-    )
-
-    loader.unzip_folder()
-    loader.create_dataloader()
-
-    Loader.plot_images()
-
     if args.train:
+
+        loader = Loader(
+            image_path=args.image_path,
+            image_size=args.image_size,
+            split_size=args.split_size,
+            batch_size=args.batch_size,
+        )
+
+        loader.unzip_folder()
+        loader.create_dataloader()
+
+        Loader.plot_images()
 
         trainer = Trainer(
             epochs=args.epochs,

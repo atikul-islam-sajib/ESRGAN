@@ -1,0 +1,51 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python ./src/cli.py --train
+    deps:
+    - path: ./data/processed/
+      hash: md5
+      md5: 87609944bd50198ed5bf77dbfc7ce360.dir
+      size: 15052632
+      nfiles: 3
+    - path: ./src/cli.py
+      hash: md5
+      md5: 1e4a2e1bbeaf2e2c64258f71f21871a0
+      size: 4793
+    - path: ./src/dataloader.py
+      hash: md5
+      md5: b041335032eaa3f589f25d8631dfb4da
+      size: 7405
+    - path: ./src/trainer.py
+      hash: md5
+      md5: 1604fb8c07707e25b9888e89ac5d55f9
+      size: 10526
+  test:
+    cmd: python ./src/cli.py --test
+    deps:
+    - path: ./checkpoints/
+      hash: md5
+      md5: 709b16a9f1a61a83c9972284ae374593.dir
+      size: 234317930
+      nfiles: 16
+    - path: ./data/processed/
+      hash: md5
+      md5: 708d0e6071814bda845dc29550310d04.dir
+      size: 15052632
+      nfiles: 3
+    - path: ./src/cli.py
+      hash: md5
+      md5: 1e4a2e1bbeaf2e2c64258f71f21871a0
+      size: 4793
+    - path: ./src/dataloader.py
+      hash: md5
+      md5: b041335032eaa3f589f25d8631dfb4da
+      size: 7405
+    - path: ./src/tester.py
+      hash: md5
+      md5: 7b3372db59d94283c2d225982fb3e315
+      size: 4052
+    - path: ./src/trainer.py
+      hash: md5
+      md5: 1604fb8c07707e25b9888e89ac5d55f9
+      size: 10526
