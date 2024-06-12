@@ -2,9 +2,27 @@ path:
   RAW_DATA_PATH: "./data/raw/"
   PROCESSED_DATA_PATH: "./data/processed/"
   ARTIFACTS_PATH: "./research/artifacts/"
+  TRAIN_IMAGES_PATH: "./outputs/train_images/"
+  TRAIN_MODEL_CHECKPOINT_PATH: "./checkpoints/train_models"
+  METRICS_PATH: "./outputs/metrics/"
+  BEST_MODEL_CHECKPOINT_PATH: "./checkpoints/best_model"
 
 dataloader:
   image_path: "./data/raw/dataset.zip"
   image_size: 64
   split_size: 0.40
   batch_size: 1
+
+trainer:
+  epochs: 500
+  lr: 0.0002
+  beta1: 0.5
+  beta2: 0.999
+  adam: True
+  SGD: False
+  momentum: 0.9
+  content_loss: 0.01
+  pixel_loss: 0.05
+  device: "mps"
+  lr_scheduler: False
+  weight_init: False

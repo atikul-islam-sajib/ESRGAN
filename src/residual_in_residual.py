@@ -34,7 +34,7 @@ class ResidualInResidual(nn.Module):
             output = self.denseblock3(input3)
             output = torch.mul(output, self.res_scale) + input3
 
-            return output
+            return output + x
 
 
 if __name__ == "__main__":

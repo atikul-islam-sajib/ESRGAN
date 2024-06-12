@@ -39,7 +39,7 @@ def helper(**kwargs):
     momentum = kwargs["momentum"]
 
     netG = Generator(in_channels=3, out_channels=64)
-    netD = Discriminator(in_channels=64, out_channels=64)
+    netD = Discriminator(in_channels=3, out_channels=64)
 
     if adam:
         optimizerG = optim.Adam(params=netG.parameters(), lr=lr, betas=(beta1, beta2))

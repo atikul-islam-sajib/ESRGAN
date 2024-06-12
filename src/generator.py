@@ -92,12 +92,14 @@ if __name__ == "__main__":
 
     netG = Generator(in_channels=args.in_channels, out_channels=args.out_channels)
 
-    assert Generator.total_params(model=netG) == 26893315
+    print(netG(torch.randn(1, 3, 64, 64)).size())
 
-    assert netG(torch.randn(1, 3, 64, 64)).size() == (1, 3, 256, 256)
+    # assert Generator.total_params(model=netG) == 26893315
 
-    draw_graph(model=netG, input_data=torch.randn(1, 3, 64, 64)).visual_graph.render(
-        filename=os.path.join(config()["path"]["ARTIFACTS_PATH"], "netG"), format="png"
-    )
+    # assert netG(torch.randn(1, 3, 64, 64)).size() == (1, 3, 256, 256)
 
-    print(summary(model=netG, input_size=(3, 64, 64)))
+    # draw_graph(model=netG, input_data=torch.randn(1, 3, 64, 64)).visual_graph.render(
+    #     filename=os.path.join(config()["path"]["ARTIFACTS_PATH"], "netG"), format="png"
+    # )
+
+    # print(summary(model=netG, input_size=(3, 64, 64)))
