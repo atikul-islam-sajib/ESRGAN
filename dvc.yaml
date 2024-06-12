@@ -1,0 +1,10 @@
+stages:
+  train:
+    cmd: python ./src/cli.py --train
+    deps: 
+      - ./src/cli.py
+      - ./src/dataloader.py
+      - ./src/trainer.py
+      - ./data/processed/
+
+

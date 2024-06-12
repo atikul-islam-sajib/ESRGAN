@@ -116,6 +116,13 @@ def cli():
         help="Path to the dataloader pickle file",
     )
 
+    parser.add_argument(
+        "--train", action="store_true", help="Train the model".capitalize()
+    )
+    parser.add_argument(
+        "--test", action="store_true", help="Test the model".capitalize()
+    )
+
     args = parser.parse_args()
 
     loader = Loader(
@@ -130,31 +137,35 @@ def cli():
 
     Loader.plot_images()
 
-    trainer = Trainer(
-        epochs=args.epochs,
-        lr=args.lr,
-        beta1=args.beta1,
-        beta2=args.beta2,
-        adam=args.adam,
-        SGD=args.SGD,
-        momentum=args.momentum,
-        content_loss=args.content_loss,
-        pixel_loss=args.pixel_loss,
-        device=args.device,
-        lr_scheduler=args.lr_scheduler,
-        is_weight_init=args.weight_init,
-    )
+    if args.train:
 
-    trainer.train()
-    trainer.plot_history()
+        trainer = Trainer(
+            epochs=args.epochs,
+            lr=args.lr,
+            beta1=args.beta1,
+            beta2=args.beta2,
+            adam=args.adam,
+            SGD=args.SGD,
+            momentum=args.momentum,
+            content_loss=args.content_loss,
+            pixel_loss=args.pixel_loss,
+            device=args.device,
+            lr_scheduler=args.lr_scheduler,
+            is_weight_init=args.weight_init,
+        )
 
-    tester = Tester(
-        model=args.model,
-        dataloader=args.dataloader,
-        device=args.device,
-    )
+        trainer.train()
+        trainer.plot_history()
 
-    tester.test()
+    if args.test:
+
+        tester = Tester(
+            model=args.model,
+            dataloader=args.dataloader,
+            device=args.device,
+        )
+
+        tester.test()
 
 
 if __name__ == "__main__":
