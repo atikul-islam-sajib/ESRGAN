@@ -98,7 +98,7 @@ For detailed documentation on the implementation and usage, visit the -> [ESRGAN
 
 ### User Guide Notebook - Custom Modules
 
-For detailed documentation on the implementation and usage, visit the -> [ESRGAN Notebook - CM](https://github.com/atikul-islam-sajib/SRGAN/blob/main/research/notebooks/ModelTrain-Modules.ipynb).
+For detailed documentation on the implementation and usage, visit the -> [ESRGAN Notebook - CM](https://github.com/atikul-islam-sajib/ESRGAN/blob/main/research/notebooks/ESRGAN_CM.ipynb).
 
 ## Data Versioning with DVC
 To ensure you have the correct version of the dataset and model artifacts.
