@@ -74,7 +74,7 @@ This project is thoughtfully organized to support the development, training, and
 - **unittest/**
   - Unit tests ensuring code reliability, correctness, and functionality across various project components.
 
-### Dataset Organization for srgan
+### Dataset Organization for ESRGAN
 
 The dataset is organized into three categories for ESRGAN. Each category directly contains paired images and their corresponding lower resolution images and higher resolution, stored together to simplify the association between lower resolution and higher resolution images .
 
