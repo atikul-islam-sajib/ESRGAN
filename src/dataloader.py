@@ -1,4 +1,5 @@
 import os
+import sys
 import cv2
 import zipfile
 import argparse
@@ -7,6 +8,8 @@ import matplotlib.pyplot as plt
 from torchvision import transforms
 from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import train_test_split
+
+sys.path.append("src/")
 
 from utils import dump, load, config
 
