@@ -1,4 +1,4 @@
-# Enhanced-Super-Resolution GAN (SR-GAN) Project
+# Enhanced-Super-Resolution GAN (ESRGAN) Project
 
 <img src="https://raw.githubusercontent.com/atikul-islam-sajib/Research-Assistant-Work-/main/IMG_9292.jpg" alt="AC-GAN - Medical Image Dataset Generator: Generated Image with labels">
 
