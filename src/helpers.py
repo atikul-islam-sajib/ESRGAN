@@ -1,9 +1,12 @@
 import os
+import sys
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from utils import config, load
 
+sys.path.append("/src/")
+
+from utils import config, load
 from generator import Generator
 from discriminator import Discriminator
 
