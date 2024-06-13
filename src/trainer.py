@@ -1,4 +1,5 @@
 import os
+import sys
 import torch
 import mlflow
 import argparse
@@ -8,6 +9,9 @@ from helpers import helper
 import matplotlib.pyplot as plt
 from dagshub import dagshub_logger
 from torchvision.utils import save_image
+
+sys.path.append("/src/")
+
 from utils import config, load, dump, device_init, weight_init
 
 
