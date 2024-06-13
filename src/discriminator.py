@@ -1,12 +1,14 @@
 import os
+import sys
 import torch
 import argparse
 import torch.nn as nn
-
-from utils import config
-
 from torchsummary import summary
 from torchview import draw_graph
+
+sys.path.append("/src/")
+
+from utils import config
 
 
 class Discriminator(nn.Module):
