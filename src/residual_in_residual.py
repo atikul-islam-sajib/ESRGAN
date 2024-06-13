@@ -1,7 +1,10 @@
 import os
+import sys
 import torch
 import argparse
 import torch.nn as nn
+
+sys.path.append("/src/")
 
 from dense_block import DenseBlock
 
