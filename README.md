@@ -94,7 +94,7 @@ dataset/
 
 ### User Guide Notebook - CLI
 
-For detailed documentation on the implementation and usage, visit the -> [ESRGAN Notebook - CLI](https://github.com/atikul-islam-sajib/SRGAN/blob/main/research/notebooks/ModelTrain-CLI.ipynb).
+For detailed documentation on the implementation and usage, visit the -> [ESRGAN Notebook - CLI](https://github.com/atikul-islam-sajib/ESRGAN/blob/main/research/notebooks/ESRGAN_CLI.ipynb).
 
 ### User Guide Notebook - Custom Modules
 
