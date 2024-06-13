@@ -1,15 +1,17 @@
 import os
+import sys
 import torch
 import argparse
 import torch.nn as nn
+from torchview import draw_graph
+from torchsummary import summary
+
+sys.path.append("/src/")
 
 from utils import config
 
 from output_block import OutputBlock
 from residual_in_residual import ResidualInResidual
-
-from torchview import draw_graph
-from torchsummary import summary
 
 
 class Generator(nn.Module):
