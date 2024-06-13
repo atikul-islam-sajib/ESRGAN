@@ -1,10 +1,13 @@
 import os
+import sys
 import torch
 import argparse
 import torch.nn as nn
 import matplotlib.pyplot as plt
-from generator import Generator
 
+sys.path.append("/src/")
+
+from generator import Generator
 from utils import config, load, device_init
 
 
