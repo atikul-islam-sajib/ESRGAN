@@ -185,7 +185,6 @@ tester:
   device: "mps"                        # Device for testing
   dataloader: "valid"                  # Dataloader for validation
 ```
-```
 
 
 #### Initializing Data Loader - Custom Modules
