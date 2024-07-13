@@ -149,40 +149,42 @@ The project is controlled via a command line interface (CLI) which allows for ru
 **Configure the Project**:
    Update the `config.yml` file with the appropriate paths and settings. An example `config.yml`:
    ```yaml
-  path: 
-    RAW_DATA_PATH: "./data/raw/"
-    PROCESSED_DATA_PATH: "./data/processed/"
-    ARTIFACTS_PATH: "./research/artifacts/"
-    TRAIN_IMAGES_PATH: "./outputs/train_images/"
-    TEST_IMAGE_PATH: "./outputs/test_images/"
-    TRAIN_MODEL_CHECKPOINT_PATH: "./checkpoints/train_models"
-    METRICS_PATH: "./outputs/metrics/"
-    BEST_MODEL_CHECKPOINT_PATH: "./checkpoints/best_model"
+```yaml
+path: 
+  RAW_DATA_PATH: "./data/raw/"
+  PROCESSED_DATA_PATH: "./data/processed/"
+  ARTIFACTS_PATH: "./research/artifacts/"
+  TRAIN_IMAGES_PATH: "./outputs/train_images/"
+  TEST_IMAGE_PATH: "./outputs/test_images/"
+  TRAIN_MODEL_CHECKPOINT_PATH: "./checkpoints/train_models"
+  METRICS_PATH: "./outputs/metrics/"
+  BEST_MODEL_CHECKPOINT_PATH: "./checkpoints/best_model"
 
-  dataloader:
-    image_path: "./data/raw/dataset.zip"
-    image_size: 64
-    split_size: 0.40
-    batch_size: 4
+dataloader:
+  image_path: "./data/raw/dataset.zip" # Path to the zipped dataset
+  image_size: 64                       # Image size for processing
+  split_size: 0.40                     # Fraction of data used for validation
+  batch_size: 4                        # Number of images per batch
 
-  trainer:
-    epochs: 500
-    lr: 0.0002
-    beta1: 0.5
-    beta2: 0.999
-    adam: True
-    SGD: False
-    momentum: 0.9
-    content_loss: 0.01
-    pixel_loss: 0.05
-    device: "mps"
-    lr_scheduler: False
-    weight_init: True
+trainer:
+  epochs: 500                          # Number of training epochs
+  lr: 0.0002                           # Learning rate
+  beta1: 0.5                           # Beta1 hyperparameter for Adam
+  beta2: 0.999                         # Beta2 hyperparameter for Adam
+  adam: True                           # Use Adam optimizer
+  SGD: False                           # Use SGD optimizer
+  momentum: 0.9                        # Momentum for SGD (if used)
+  content_loss: 0.01                   # Weight of content loss
+  pixel_loss: 0.05                     # Weight of pixel loss
+  device: "mps"                        # Device for training (e.g., mps, cuda)
+  lr_scheduler: False                  # Use learning rate scheduler
+  weight_init: True                    # Initialize model weights
 
-  tester:
-    model: "best"       # "./checkpoints/best_model/netG.pth"
-    device: "mps"
-    dataloader: "valid"
+tester:
+  model: "best"                        # Path to the best model checkpoint
+  device: "mps"                        # Device for testing
+  dataloader: "valid"                  # Dataloader for validation
+```
 ```
 
 
