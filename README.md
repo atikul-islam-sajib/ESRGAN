@@ -146,6 +146,45 @@ The project is controlled via a command line interface (CLI) which allows for ru
 - **MPS Command**: For Apple Silicon (M1, M2 chips), using the `mps` device can provide optimized performance.
 - **CPU Command**: Suitable for systems without dedicated GPU support or for testing purposes on any machine.
 
+**Configure the Project**:
+   Update the `config.yml` file with the appropriate paths and settings. An example `config.yml`:
+   ```yaml
+  path: 
+    RAW_DATA_PATH: "./data/raw/"
+    PROCESSED_DATA_PATH: "./data/processed/"
+    ARTIFACTS_PATH: "./research/artifacts/"
+    TRAIN_IMAGES_PATH: "./outputs/train_images/"
+    TEST_IMAGE_PATH: "./outputs/test_images/"
+    TRAIN_MODEL_CHECKPOINT_PATH: "./checkpoints/train_models"
+    METRICS_PATH: "./outputs/metrics/"
+    BEST_MODEL_CHECKPOINT_PATH: "./checkpoints/best_model"
+
+dataloader:
+  image_path: "./data/raw/dataset.zip"
+  image_size: 64
+  split_size: 0.40
+  batch_size: 4
+
+trainer:
+  epochs: 500
+  lr: 0.0002
+  beta1: 0.5
+  beta2: 0.999
+  adam: True
+  SGD: False
+  momentum: 0.9
+  content_loss: 0.01
+  pixel_loss: 0.05
+  device: "mps"
+  lr_scheduler: False
+  weight_init: True
+
+tester:
+  model: "best"       # "./checkpoints/best_model/netG.pth"
+  device: "mps"
+  dataloader: "valid"
+```
+
 
 #### Initializing Data Loader - Custom Modules
 ```python
